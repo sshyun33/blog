@@ -3,15 +3,18 @@ node {
   checkout scm
 
   withEnv([
-    "COMPOSE_FILE=docker-compose.yml",
+    "COMPOSE_FILE=cd/docker-compose.yml",
   ]) {
-    stage "Ready"
+    stage "Ready" 
     sh "docker-compose build gradlew"
-
-    stage "Unit"
+      
+    stage "Unit" 
     sh "docker-compose run --rm unit"
 
-    stage "Build"
+    stage "Build" 
     sh "docker-compose build app"
+    
+    stage "Deploy" 
+    sh "docker-compose up -d app"
   }
 }
