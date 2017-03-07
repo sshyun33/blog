@@ -3,7 +3,7 @@ node {
   checkout scm
 
   withEnv([
-    "COMPOSE_FILE=docker-compose.yml",
+    "COMPOSE_FILE=cd/docker-compose.yml",
   ]) {
     stage "Ready"
     sh "docker-compose build gradlew"
