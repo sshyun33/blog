@@ -5,13 +5,20 @@ node {
   withEnv([
     "COMPOSE_FILE=cd/docker-compose.yml",
   ]) {
-    stage "Ready"
-    sh "docker-compose build gradlew"
-
-    stage "Unit"
-    sh "docker-compose run --rm unit"
-
-    stage "Build"
-    sh "docker-compose build app"
+    stage "Ready" {
+      sh "docker-compose build gradlew"
+    }
+   
+    stage "Unit" {
+      sh "docker-compose run --rm unit"
+    }
+    
+    stage "Build" {
+      sh "docker-compose build app"
+    }
+    
+    stage "Deploy" {
+      sh "docker-compose up -d app"
+    }
   }
 }
